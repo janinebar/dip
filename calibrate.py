@@ -36,13 +36,18 @@ def main():
     args.setdefault('--square_size', 1.0)
     args.setdefault('--threads', 4)
     if not img_mask:
-        img_mask = '../leftboard.png'  # default
+        img_mask = './right/right_*.jpg'  # default
     else:
         img_mask = img_mask[0]
 
     img_names = glob(img_mask)
-    img_names.append("leftboard.jpg")
-    img_names.append("rightboard.jpg")
+    #img_names.append("leftboard.jpg")
+    #img_names.append("rightboard.jpg")
+
+    #for x in range(20):
+       # img_names.append(f"right_")
+
+
     print(img_names)
     debug_dir = args.get('--debug')
     if debug_dir and not os.path.isdir(debug_dir):
