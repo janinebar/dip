@@ -5,6 +5,12 @@ from PIL import Image
 import matplotlib
 import sys
 
+# Camera baselines in mm
+baselines = [176.252, 174.945, 177.288, 171.548, 174.724, 174.019, 193.001, 178.089, 178.232]
+
+# Focal lengths in pixels
+fs = [4161.221, 7190.247, 5299.313, 6338.47, 6872.874, 5806.559, 3979.911, 2826.171, 2945.377]
+
 def save_disparity():
 	num = 0
 
@@ -23,7 +29,9 @@ def save_disparity():
 		num = num+1
 
 def get_distance():
-	disp = cv2.imread("./perfect_disparity/disparity_0.png", 0)
+	num = 9 # change this value depending on the picture
+
+	disp = cv2.imread("./perfect_disparity/disparity_{}.png".format(num), 0)
 	print(disp.shape)
 
 	maxed = np.amax(disp)
@@ -31,8 +39,9 @@ def get_distance():
 	coor = np.where(disp == maxed)
 	coor2 = list(zip(coor[0], coor[1]))
 	print("Max at {}".format(coor2))
-	baseline = 176.252
-	f = 4161.221
+
+	baseline = baselines[num]
+	f = fs[num]
 	dist = baseline*f/maxed 
 	print("Distance is {}mm".format(dist))
 
